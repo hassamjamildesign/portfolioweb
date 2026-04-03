@@ -467,41 +467,122 @@ section {
     align-items: center;
 }
 
+/* About Image Section */
 .about-image {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .image-wrapper {
     position: relative;
-    width: 300px;
-    height: 300px;
+    width: 320px;
+    height: 400px;
 }
 
-.image-placeholder {
+.image-container {
+    position: relative;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-card));
     border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 5rem;
-    color: var(--primary-color);
-    position: relative;
+    overflow: hidden;
     z-index: 2;
-    border: 2px solid var(--border-color);
+    background: var(--bg-secondary);
 }
 
-.image-border {
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: var(--transition);
+    display: block;
+}
+
+/* Hover zoom effect on image */
+.image-wrapper:hover .profile-image {
+    transform: scale(1.05);
+}
+
+/* Decorative frame behind image */
+.image-frame {
     position: absolute;
     top: 20px;
     left: 20px;
     width: 100%;
     height: 100%;
-    border: 2px solid var(--primary-color);
+    border: 3px solid var(--primary-color);
     border-radius: 20px;
     z-index: 1;
     transition: var(--transition);
+}
+
+.image-wrapper:hover .image-frame {
+    top: 15px;
+    left: 15px;
+    border-color: var(--accent-color);
+}
+
+/* Glow effect behind image */
+.image-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 110%;
+    height: 110%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 25px;
+    filter: blur(40px);
+    opacity: 0.3;
+    z-index: 0;
+    transition: var(--transition);
+}
+
+.image-wrapper:hover .image-glow {
+    opacity: 0.5;
+    filter: blur(50px);
+}
+
+/* Image placeholder when no image is loaded */
+.image-container img[src=""],
+.image-container img:not([src]) {
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-card));
+    min-height: 100%;
+}
+
+.image-container img[src=""]::before,
+.image-container img:not([src])::before {
+    content: '\f007';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5rem;
+    color: var(--text-muted);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .image-wrapper {
+        width: 280px;
+        height: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .image-wrapper {
+        width: 240px;
+        height: 300px;
+    }
+    
+    .image-frame {
+        top: 15px;
+        left: 15px;
+    }
 }
 
 .image-wrapper:hover .image-border {
