@@ -3,425 +3,436 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hassam | ML & Coding Enthusiast</title>
+    <title>Hassam | ML & Dev Universe</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Particle Background -->
-    <div id="particles-js"></div>
-    
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#home" class="nav-logo">
-                <span class="logo-bracket">&lt;</span>Hassam<span class="logo-bracket">/&gt;</span>
-            </a>
-            <div class="nav-toggle" id="nav-toggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
+
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-ring" id="cursor-ring"></div>
+    <canvas id="star-canvas"></canvas>
+
+    <!-- NAV -->
+    <nav class="nav" id="navbar">
+        <a href="#home" class="nav-logo">
+            <span class="bkt">&lt;</span>Hassam<span class="bkt">/&gt;</span>
+        </a>
+        <div class="nav-toggle" id="nav-toggle">
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#connect">Connect</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
     </nav>
 
-    <!-- Home Section -->
-    <section id="home" class="home">
-        <div class="home-content">
-            <div class="code-decoration top-left">const developer = true;</div>
-            <div class="code-decoration bottom-right">while(alive) { code(); }</div>
-            
-            <p class="greeting">Hello, World! I'm</p>
-            <h1 class="name">Hassam</h1>
-            <div class="title-container">
-                <span class="static-text">I'm a </span>
-                <span class="typing-text"></span>
-                <span class="cursor">|</span>
+    <!-- HERO -->
+    <section id="home" class="hero">
+        <div class="hero-inner">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                Available for hire &middot; Open to opportunities
             </div>
-            <p class="intro">Passionate about Machine Learning, Web Development, and creating innovative solutions through code.</p>
-            
-            <div class="cta-buttons">
-                <a href="#projects" class="btn btn-primary">
-                    <i class="fas fa-rocket"></i> View Projects
-                </a>
-                <a href="#contact" class="btn btn-secondary">
-                    <i class="fas fa-paper-plane"></i> Contact Me
-                </a>
+            <h1 class="hero-name">
+                <span class="glitch" data-text="Hassam">Hassam</span>
+            </h1>
+            <div class="hero-typing">
+                I'm a <span class="type-word" id="type-word"></span><span class="type-cursor">|</span>
             </div>
-            
-            <div class="scroll-indicator">
-                <div class="mouse">
-                    <div class="wheel"></div>
-                </div>
-                <p>Scroll Down</p>
+            <p class="hero-desc">
+                Building intelligent systems and beautiful interfaces. Passionate about Machine Learning,
+                elegant code architecture, and solving real-world problems.
+            </p>
+            <div class="hero-btns">
+                <a href="#projects" class="btn btn-primary"><i class="fas fa-rocket"></i> View My Work</a>
+                <a href="#contact" class="btn btn-outline"><i class="fas fa-paper-plane"></i> Get In Touch</a>
             </div>
         </div>
-        
-        <div class="floating-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
+        <div class="scroll-hint">
+            <span>scroll</span>
+            <div class="scroll-line"></div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <!-- About Section -->
-<section id="about" class="about">
-    <div class="container">
-        <h2 class="section-title">
-            <span class="title-number">01.</span> About Me
-        </h2>
-        
-        <div class="about-content">
-            <div class="about-image">
-                <div class="image-wrapper">
-                    <div class="image-container">
-                        <!-- Replace the src below with your image path -->
-                        <img src="resources/self.png" alt="Hassam - Developer" class="profile-image">
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="section-wrap reveal">
+            <div class="sec-label">01 / about me</div>
+            <h2 class="sec-title">Code. Create. <span class="highlight">Innovate.</span></h2>
+            <div class="about-grid">
+                <div class="about-img-wrap reveal">
+                    <div class="about-img-frame">
+                        <!-- EDIT: change src to your photo -->
+                        <img src="resources/self.png" alt="Hassam"
+                             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        <div class="img-placeholder"><i class="fas fa-user-astronaut"></i></div>
                     </div>
-                    <div class="image-frame"></div>
-                    <div class="image-glow"></div>
+                    <div class="about-deco-ring"></div>
+                    <div class="about-deco-blob"></div>
                 </div>
-            </div>
-            
-            <div class="about-text">
-                <div class="glass-card">
-                    <p class="about-description">
-                        I'm a dedicated developer with a strong foundation in multiple programming languages and a passion for Machine Learning. My journey in tech started with a curiosity about how things work, which evolved into a career building robust applications and intelligent systems.
+                <div class="about-text reveal">
+                    <!-- EDIT: update bio paragraphs -->
+                    <p class="about-desc">
+                        I'm <span class="highlight">Muhammad Hassam Jamil</span> — a developer with a sharp eye
+                        for elegant solutions and a deep fascination with Machine Learning. My journey began with
+                        curiosity: <em>how does software think?</em>
                     </p>
-                    <p class="about-description">
-                        When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, or optimizing algorithms. I believe in writing clean, efficient code that makes a difference.
+                    <p class="about-desc">
+                        That question led me through C, C++, C#, Python, and into the realm of neural networks
+                        and data pipelines. I build systems that not only work — they <em>learn</em>.
                     </p>
-                    
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <span class="stat-number">2+</span>
-                            <span class="stat-label">Years Coding</span>
+                    <p class="about-desc">
+                        When I'm not engineering algorithms, I'm crafting interfaces that feel alive. I believe
+                        in clean code, bold design, and shipping things that matter.
+                    </p>
+                    <!-- EDIT: update stat numbers in data-target -->
+                    <div class="stats-row">
+                        <div class="stat">
+                            <div class="stat-n" data-target="2">0</div>
+                            <div class="stat-l">Years Coding</div>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-number">5+</span>
-                            <span class="stat-label">Projects Completed</span>
+                        <div class="stat">
+                            <div class="stat-n" data-target="5">0</div>
+                            <div class="stat-l">Projects Done</div>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-number">100%</span>
-                            <span class="stat-label">Passion</span>
+                        <div class="stat">
+                            <div class="stat-n">&#8734;</div>
+                            <div class="stat-l">Curiosity</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">
-                <span class="title-number">02.</span> Skills & Technologies
-            </h2>
-            
+    <!-- SKILLS
+    =====================================================
+    HOW TO ADD A SKILL TO A CATEGORY:
+      1. Find the correct .skill-cat block below
+      2. Copy one <div class="skill-row"> block
+      3. Paste it before the closing </div> of that .skill-cat
+      4. Edit: icon class, skill name, data-w (0-100), and percentage text
+
+    HOW TO ADD A SKILL TO THE SOLAR SYSTEM:
+      Open script.js and add an entry to the solarSkills array at the top.
+    ===================================================== -->
+    <section id="skills" class="skills-section">
+        <div class="section-wrap">
+            <div class="sec-label reveal">02 / skills &amp; tech</div>
+            <h2 class="sec-title reveal">My Tech <span class="highlight">Universe</span></h2>
+            <p class="sec-sub reveal">Each planet orbits the core — hover any planet to explore.</p>
+
+            <!-- Solar System -->
+            <div class="solar-wrap reveal">
+                <canvas id="solar-canvas"></canvas>
+            </div>
+
+            <!-- Skill Categories -->
             <div class="skills-grid">
-                <!-- Programming Languages -->
-                <div class="skill-category glass-card">
-                    <h3 class="category-title">
-                        <i class="fas fa-code"></i> Languages
-                    </h3>
-                    <div class="skills-list">
-                        <div class="skill-item" data-skill="C#">
-                            <div class="skill-icon"><i class="fas fa-hashtag"></i></div>
-                            <span class="skill-name">C#</span>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div>
-                        </div>
-                        <div class="skill-item" data-skill="C++">
-                            <div class="skill-icon"><i class="fas fa-plus"></i></div>
-                            <span class="skill-name">C++</span>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 80%"></div></div>
-                        </div>
-                        <div class="skill-item" data-skill="C">
-                            <div class="skill-icon"><i class="fas fa-copyright"></i></div>
-                            <span class="skill-name">C</span>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 75%"></div></div>
-                        </div>
-                        <div class="skill-item" data-skill="Python">
-                            <div class="skill-icon"><i class="fab fa-python"></i></div>
-                            <span class="skill-name">Python</span>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div>
-                        </div>
+
+                <!-- LANGUAGES -->
+                <div class="skill-cat reveal" style="--cat-color:#00f5ff">
+                    <div class="cat-head">
+                        <div class="cat-icon"><i class="fas fa-code"></i></div>
+                        <div class="cat-title">Languages</div>
+                    </div>
+                    <!-- COPY THIS skill-row TO ADD A LANGUAGE SKILL -->
+                    <div class="skill-row">
+                        <div class="sk-icon"><i class="fab fa-python"></i></div>
+                        <span class="sk-name">Python</span>
+                        <div class="sk-bar"><div class="sk-fill" data-w="90"></div></div>
+                        <span class="sk-pct">90%</span>
+                    </div>
+                    <div class="skill-row">
+                        <div class="sk-icon"><i class="fas fa-hashtag"></i></div>
+                        <span class="sk-name">C#</span>
+                        <div class="sk-bar"><div class="sk-fill" data-w="85"></div></div>
+                        <span class="sk-pct">85%</span>
+                    </div>
+                    <div class="skill-row">
+                        <div class="sk-icon"><i class="fas fa-plus"></i></div>
+                        <span class="sk-name">C++</span>
+                        <div class="sk-bar"><div class="sk-fill" data-w="80"></div></div>
+                        <span class="sk-pct">80%</span>
+                    </div>
+                    <div class="skill-row">
+                        <div class="sk-icon"><i class="fas fa-copyright"></i></div>
+                        <span class="sk-name">C</span>
+                        <div class="sk-bar"><div class="sk-fill" data-w="75"></div></div>
+                        <span class="sk-pct">75%</span>
                     </div>
                 </div>
 
-                <!-- Web Technologies -->
-                <div class="skill-category glass-card">
-                    <h3 class="category-title">
-                        <i class="fas fa-globe"></i> Web Development
-                    </h3>
-                    <div class="skills-list">
-                        <div class="skill-item" data-skill="HTML">
-                            <div class="skill-icon"><i class="fab fa-html5"></i></div>
-                            <span class="skill-name">HTML</span>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 95%"></div></div>
-                        </div>
-                        <div class="skill-item" data-skill="CSS">
-                            <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
-                            <span class="skill-name">CSS</span>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div>
-                        </div>
-                        <div class="skill-item" data-skill="JavaScript">
-                            <div class="skill-icon"><i class="fab fa-js"></i></div>
-                            <span class="skill-name">JavaScript</span>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div>
-                        </div>
+                <!-- WEB DEVELOPMENT -->
+                <div class="skill-cat reveal" style="--cat-color:#8b5cf6">
+                    <div class="cat-head">
+                        <div class="cat-icon"><i class="fas fa-globe"></i></div>
+                        <div class="cat-title">Web Development</div>
+                    </div>
+                    <!-- COPY THIS skill-row TO ADD A WEB SKILL -->
+                    <div class="skill-row">
+                        <div class="sk-icon"><i class="fab fa-html5"></i></div>
+                        <span class="sk-name">HTML5</span>
+                        <div class="sk-bar"><div class="sk-fill" data-w="95"></div></div>
+                        <span class="sk-pct">95%</span>
+                    </div>
+                    <div class="skill-row">
+                        <div class="sk-icon"><i class="fab fa-css3-alt"></i></div>
+                        <span class="sk-name">CSS3</span>
+                        <div class="sk-bar"><div class="sk-fill" data-w="90"></div></div>
+                        <span class="sk-pct">90%</span>
+                    </div>
+                    <div class="skill-row">
+                        <div class="sk-icon"><i class="fab fa-js"></i></div>
+                        <span class="sk-name">JavaScript</span>
+                        <div class="sk-bar"><div class="sk-fill" data-w="85"></div></div>
+                        <span class="sk-pct">85%</span>
                     </div>
                 </div>
 
-                <!-- Database & Tools -->
-                <div class="skill-category glass-card">
-                    <h3 class="category-title">
-                        <i class="fas fa-database"></i> Database & Tools
-                    </h3>
-                    <div class="skills-list">
-                        <div class="skill-item" data-skill="MySQL">
-                            <div class="skill-icon"><i class="fas fa-database"></i></div>
-                            <span class="skill-name">MySQL</span>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 80%"></div></div>
-                        </div>
-                        <div class="skill-item" data-skill="Web Scraping">
-                            <div class="skill-icon"><i class="fas fa-spider"></i></div>
-                            <span class="skill-name">Web Scraping</span>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div>
-                        </div>
-                        <div class="skill-item" data-skill="Lead Generation">
-                            <div class="skill-icon"><i class="fas fa-bullseye"></i></div>
-                            <span class="skill-name">Lead Generation</span>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 88%"></div></div>
-                        </div>
+                <!-- ML & DATA -->
+                <div class="skill-cat reveal" style="--cat-color:#10ffb0">
+                    <div class="cat-head">
+                        <div class="cat-icon"><i class="fas fa-brain"></i></div>
+                        <div class="cat-title">ML &amp; Data</div>
+                    </div>
+                    <!-- COPY THIS skill-row TO ADD AN ML SKILL -->
+                    <div class="skill-row">
+                        <div class="sk-icon"><i class="fas fa-robot"></i></div>
+                        <span class="sk-name">Machine Learning</span>
+                        <div class="sk-bar"><div class="sk-fill" data-w="82"></div></div>
+                        <span class="sk-pct">82%</span>
+                    </div>
+                    <div class="skill-row">
+                        <div class="sk-icon"><i class="fas fa-chart-line"></i></div>
+                        <span class="sk-name">Data Analysis</span>
+                        <div class="sk-bar"><div class="sk-fill" data-w="78"></div></div>
+                        <span class="sk-pct">78%</span>
                     </div>
                 </div>
 
-                <!-- Additional Skills -->
-                <div class="skill-category glass-card">
-                    <h3 class="category-title">
-                        <i class="fas fa-brain"></i> ML & Data
-                    </h3>
-                    <div class="skills-list">
-                        <div class="skill-item" data-skill="Machine Learning">
-                            <div class="skill-icon"><i class="fas fa-robot"></i></div>
-                            <span class="skill-name">Machine Learning</span>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 82%"></div></div>
-                        </div>
-                        <div class="skill-item" data-skill="Data Analysis">
-                            <div class="skill-icon"><i class="fas fa-chart-line"></i></div>
-                            <span class="skill-name">Data Analysis</span>
-                            <div class="skill-bar"><div class="skill-progress" style="width: 78%"></div></div>
-                        </div>
+                <!-- DATABASE & TOOLS -->
+                <div class="skill-cat reveal" style="--cat-color:#ffb700">
+                    <div class="cat-head">
+                        <div class="cat-icon"><i class="fas fa-database"></i></div>
+                        <div class="cat-title">Database &amp; Tools</div>
+                    </div>
+                    <!-- COPY THIS skill-row TO ADD A DB/TOOL SKILL -->
+                    <div class="skill-row">
+                        <div class="sk-icon"><i class="fas fa-database"></i></div>
+                        <span class="sk-name">MySQL</span>
+                        <div class="sk-bar"><div class="sk-fill" data-w="80"></div></div>
+                        <span class="sk-pct">80%</span>
+                    </div>
+                    <div class="skill-row">
+                        <div class="sk-icon"><i class="fas fa-spider"></i></div>
+                        <span class="sk-name">Web Scraping</span>
+                        <div class="sk-bar"><div class="sk-fill" data-w="85"></div></div>
+                        <span class="sk-pct">85%</span>
+                    </div>
+                    <div class="skill-row">
+                        <div class="sk-icon"><i class="fas fa-bullseye"></i></div>
+                        <span class="sk-name">Lead Generation</span>
+                        <div class="sk-bar"><div class="sk-fill" data-w="88"></div></div>
+                        <span class="sk-pct">88%</span>
                     </div>
                 </div>
-            </div>
+
+            </div><!-- end .skills-grid -->
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title">
-                <span class="title-number">03.</span> Featured Projects
-            </h2>
-            
-            <div class="projects-grid">
-                <!-- Project 1 -->
-                <div class="project-card glass-card">
-                    <div class="project-image">
-                        <img src="" alt="Academic Evaluation Management System">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link" title="View Project">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                                <a href="#" class="project-link" title="Source Code">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Academic Evaluation Management System</h3>
-                        <p class="project-description">
-                            A comprehensive system for managing academic evaluations, grades, and student performance tracking with automated reporting features.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">C#</span>
-                            <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">.NET</span>
-                        </div>
-                        <div class="project-buttons">
-                            <a href="#" class="btn btn-small btn-primary">View Project</a>
-                            <a href="#" class="btn btn-small btn-secondary">Source Code</a>
-                        </div>
-                    </div>
-                </div>
+    <!-- PROJECTS
+    =====================================================
+    HOW TO ADD A PROJECT:
+      1. Copy the entire block below (from proj-card to /div)
+      2. Paste it inside .projects-grid after the last project
+      3. Edit: proj-number, icon class, title, description,
+               tech tags (duplicate/remove <span class="tag">),
+               and the GitHub href link
+    ===================================================== -->
+    <section id="projects">
+        <div class="section-wrap">
+            <div class="sec-label reveal">03 / featured work</div>
+            <h2 class="sec-title reveal">Things I've <span class="highlight">Built</span></h2>
 
-                <!-- Project 2 -->
-                <div class="project-card glass-card">
-                    <div class="project-image">
-                        <img src="" alt="Photography Website">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link" title="View Project">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                                <a href="#" class="project-link" title="Source Code">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Photography Website</h3>
-                        <p class="project-description">
-                            A visually stunning portfolio website for photographers featuring gallery management, client booking system, and image optimization.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">JavaScript</span>
-                        </div>
-                        <div class="project-buttons">
-                            <a href="#" class="btn btn-small btn-primary">View Project</a>
-                            <a href="#" class="btn btn-small btn-secondary">Source Code</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="projects-grid reveal">
 
-                <!-- Project 3 -->
-                <div class="project-card glass-card">
-                    <div class="project-image">
-                        <img src="" alt="Leads Generated System">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link" title="View Project">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                                <a href="#" class="project-link" title="Source Code">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </div>
-                        </div>
+                <!-- ===================== PROJECT 01 ===================== -->
+                <div class="proj-card">
+                    <div class="proj-img">
+                        <!-- EDIT: change fa-graduation-cap to any Font Awesome icon -->
+                        <div class="proj-img-placeholder"><i class="fas fa-graduation-cap"></i></div>
+                        <!-- EDIT: change 01 to the project number -->
+                        <span class="proj-number">01</span>
+                        <div class="proj-img-glow"></div>
                     </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Leads Generated System</h3>
-                        <p class="project-description">
-                            An automated lead generation and management platform with web scraping capabilities, CRM integration, and analytics dashboard.
+                    <div class="proj-body">
+                        <!-- EDIT: Project title -->
+                        <h3 class="proj-title">Academic Evaluation Management System</h3>
+                        <!-- EDIT: Project description -->
+                        <p class="proj-desc">
+                            A comprehensive system for managing academic evaluations, grades,
+                            and student performance tracking with automated reporting features.
                         </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Web Scraping</span>
-                            <span class="tech-tag">MySQL</span>
+                        <!-- EDIT: Tech tags — duplicate or remove spans -->
+                        <div class="proj-tags">
+                            <span class="tag">C#</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">.NET</span>
                         </div>
-                        <div class="project-buttons">
-                            <a href="#" class="btn btn-small btn-primary">View Project</a>
-                            <a href="#" class="btn btn-small btn-secondary">Source Code</a>
+                        <div class="proj-links">
+                            <!-- EDIT: replace # with your GitHub link -->
+                            <a href="#" class="proj-link-btn gh" target="_blank">
+                                <i class="fab fa-github"></i> Source Code
+                            </a>
                         </div>
                     </div>
                 </div>
-            </div>
+                <!-- =================== END PROJECT 01 =================== -->
+
+                <!-- ===================== PROJECT 02 ===================== -->
+                <div class="proj-card">
+                    <div class="proj-img">
+                        <div class="proj-img-placeholder"><i class="fas fa-camera"></i></div>
+                        <span class="proj-number">02</span>
+                        <div class="proj-img-glow"></div>
+                    </div>
+                    <div class="proj-body">
+                        <h3 class="proj-title">Photography Portfolio Website</h3>
+                        <p class="proj-desc">
+                            A visually stunning portfolio website for photographers featuring
+                            gallery management, client booking system, and image optimization.
+                        </p>
+                        <div class="proj-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JavaScript</span>
+                        </div>
+                        <div class="proj-links">
+                            <a href="#" class="proj-link-btn gh" target="_blank">
+                                <i class="fab fa-github"></i> Source Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- =================== END PROJECT 02 =================== -->
+
+                <!-- ===================== PROJECT 03 ===================== -->
+                <div class="proj-card">
+                    <div class="proj-img">
+                        <div class="proj-img-placeholder"><i class="fas fa-bullseye"></i></div>
+                        <span class="proj-number">03</span>
+                        <div class="proj-img-glow"></div>
+                    </div>
+                    <div class="proj-body">
+                        <h3 class="proj-title">Leads Generation System</h3>
+                        <p class="proj-desc">
+                            An automated lead generation and management platform with web scraping
+                            capabilities, CRM integration, and an analytics dashboard.
+                        </p>
+                        <div class="proj-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Web Scraping</span>
+                            <span class="tag">MySQL</span>
+                        </div>
+                        <div class="proj-links">
+                            <a href="#" class="proj-link-btn gh" target="_blank">
+                                <i class="fab fa-github"></i> Source Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- =================== END PROJECT 03 =================== -->
+
+            </div><!-- end .projects-grid -->
         </div>
     </section>
 
-    <!-- Social Links Section -->
-    <section class="social-section">
-        <div class="container">
-            <h2 class="section-title">
-                <span class="title-number">04.</span> Let's Connect
-            </h2>
-            
-            <div class="social-grid">
-                <a href="https://github.com/hassamjamildesign" class="social-card glass-card github-card">
-                    <div class="social-icon">
-                        <i class="fab fa-github"></i>
-                    </div>
-                    <h3>GitHub</h3>
-                    <p>Check out my repositories and contributions</p>
-                    <span class="social-arrow"><i class="fas fa-arrow-right"></i></span>
+    <!-- CONNECT -->
+    <section id="connect" class="connect-section">
+        <div class="section-wrap">
+            <div class="sec-label reveal">04 / let's connect</div>
+            <h2 class="sec-title reveal">Find Me <span class="highlight">Online</span></h2>
+            <div class="social-cards reveal">
+                <!-- EDIT: update href links and handles -->
+                <a href="https://github.com/hassamjamildesign" class="social-card" style="--sc-color:#ffffff" target="_blank">
+                    <div class="sc-icon"><i class="fab fa-github"></i></div>
+                    <div class="sc-title">GitHub</div>
+                    <div class="sc-desc">Open source repos, contributions and experiments</div>
+                    <div class="sc-handle">@hassamjamildesign</div>
+                    <div class="sc-arrow"><i class="fas fa-arrow-up-right-from-square"></i></div>
                 </a>
-                
-                <a href="https://www.linkedin.com/in/muhammad-hassam-jamil-308a23389/" class="social-card glass-card linkedin-card">
-                    <div class="social-icon">
-                        <i class="fab fa-linkedin-in"></i>
-                    </div>
-                    <h3>LinkedIn</h3>
-                    <p>Connect with me professionally</p>
-                    <span class="social-arrow"><i class="fas fa-arrow-right"></i></span>
+                <a href="https://www.linkedin.com/in/muhammad-hassam-jamil-308a23389/" class="social-card" style="--sc-color:#0077b5" target="_blank">
+                    <div class="sc-icon"><i class="fab fa-linkedin-in"></i></div>
+                    <div class="sc-title">LinkedIn</div>
+                    <div class="sc-desc">Professional network and career updates</div>
+                    <div class="sc-handle">Muhammad Hassam Jamil</div>
+                    <div class="sc-arrow"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                </a>
+                <a href="#" class="social-card" style="--sc-color:#1da1f2">
+                    <div class="sc-icon"><i class="fab fa-twitter"></i></div>
+                    <div class="sc-title">Twitter / X</div>
+                    <div class="sc-desc">Tech thoughts, dev updates, random ideas</div>
+                    <div class="sc-handle">@hassam</div>
+                    <div class="sc-arrow"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                </a>
+                <a href="mailto:muhammadhassamjamil@gmail.com" class="social-card" style="--sc-color:#ea4335">
+                    <div class="sc-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="sc-title">Email</div>
+                    <div class="sc-desc">Direct line for collaborations and opportunities</div>
+                    <div class="sc-handle">muhammadhassamjamil@gmail.com</div>
+                    <div class="sc-arrow"><i class="fas fa-arrow-up-right-from-square"></i></div>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">
-                <span class="title-number">05.</span> Get In Touch
-            </h2>
-            
-            <div class="contact-content">
-                <div class="contact-info glass-card">
-                    <h3>Let's build something amazing together!</h3>
-                    <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.</p>
-                    
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>muhammadhassamjamil@gmail.com</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Available Worldwide</span>
-                        </div>
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="section-wrap">
+            <div class="sec-label reveal">05 / get in touch</div>
+            <h2 class="sec-title reveal">Let's Build Something <span class="highlight">Together</span></h2>
+            <div class="contact-grid reveal">
+                <div class="contact-info-card">
+                    <h3>I'm always open to new opportunities.</h3>
+                    <p>Whether it's a full-time role, a freelance gig, or a wild ML experiment — I'm listening. Let's talk!</p>
+                    <!-- EDIT: update contact details -->
+                    <div class="c-item">
+                        <div class="c-item-icon"><i class="fas fa-envelope"></i></div>
+                        <span class="c-item-text">muhammadhassamjamil@gmail.com</span>
                     </div>
-                    
-                    <div class="social-mini">
-                        <a href="https://github.com/hassamjamildesign" class="social-mini-link"><i class="fab fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/muhammad-hassam-jamil-308a23389/" class="social-mini-link"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-mini-link"><i class="fab fa-twitter"></i></a>
+                    <div class="c-item">
+                        <div class="c-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <span class="c-item-text">Available Worldwide &middot; Remote OK</span>
+                    </div>
+                    <div class="c-item">
+                        <div class="c-item-icon"><i class="fas fa-clock"></i></div>
+                        <span class="c-item-text">Response within 24 hours</span>
                     </div>
                 </div>
-                
-                <form class="contact-form glass-card" id="contact-form">
-                    <div class="form-group">
-                        <div class="input-wrapper">
-                            <i class="fas fa-user"></i>
-                            <input type="text" id="name" name="name" placeholder=" " required>
-                            <label for="name">Your Name</label>
-                        </div>
+                <form class="contact-form-card" id="contact-form">
+                    <div class="form-row">
+                        <label>Your Name</label>
+                        <input type="text" placeholder="John Doe" required>
                     </div>
-                    
-                    <div class="form-group">
-                        <div class="input-wrapper">
-                            <i class="fas fa-envelope"></i>
-                            <input type="email" id="email" name="email" placeholder=" " required>
-                            <label for="email">Your Email</label>
-                        </div>
+                    <div class="form-row">
+                        <label>Your Email</label>
+                        <input type="email" placeholder="john@example.com" required>
                     </div>
-                    
-                    <div class="form-group">
-                        <div class="input-wrapper textarea-wrapper">
-                            <i class="fas fa-comment"></i>
-                            <textarea id="message" name="message" placeholder=" " required></textarea>
-                            <label for="message">Your Message</label>
-                        </div>
+                    <div class="form-row">
+                        <label>Message</label>
+                        <textarea placeholder="Tell me about your project..." required></textarea>
                     </div>
-                    
-                    <button type="submit" class="btn btn-primary btn-full">
+                    <button type="submit" class="btn-submit">
                         <i class="fas fa-paper-plane"></i> Send Message
                     </button>
                 </form>
@@ -429,34 +440,23 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- FOOTER -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <span class="logo-bracket">&lt;</span>Hassam<span class="logo-bracket">/&gt;</span>
-                </div>
-                
-                <div class="footer-social">
-                    <a href="https://github.com/hassamjamildesign" class="footer-social-link"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/muhammad-hassam-jamil-308a23389/" class="footer-social-link"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="footer-social-link"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="footer-social-link"><i class="fas fa-envelope"></i></a>
-                </div>
-                
-                <p class="footer-text">
-                    Designed & Built with <i class="fas fa-heart"></i> and lots of <i class="fas fa-coffee"></i>
-                </p>
-                
-                <p class="copyright">
-                    &copy; 2026 Hassam. All rights reserved.
-                </p>
-            </div>
+        <div class="footer-logo">
+            <span class="bkt">&lt;</span>Hassam<span class="bkt">/&gt;</span>
         </div>
+        <div class="footer-links">
+            <a href="https://github.com/hassamjamildesign" class="footer-link" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/muhammad-hassam-jamil-308a23389/" class="footer-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="footer-link"><i class="fab fa-twitter"></i></a>
+            <a href="mailto:muhammadhassamjamil@gmail.com" class="footer-link"><i class="fas fa-envelope"></i></a>
+        </div>
+        <p class="footer-copy">
+            &copy; 2026 Hassam &middot; Built with <span class="footer-heart">&#9829;</span> and lots of &#9749;
+        </p>
     </footer>
 
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="back-to-top">
+    <button class="btt" id="btt" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
     </button>
 
