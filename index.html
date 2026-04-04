@@ -70,7 +70,6 @@
             <div class="about-grid">
                 <div class="about-img-wrap reveal">
                     <div class="about-img-frame">
-                        <!-- EDIT: change src to your photo -->
                         <img src="resources/self.png" alt="Hassam"
                              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                         <div class="img-placeholder"><i class="fas fa-user-astronaut"></i></div>
@@ -79,7 +78,6 @@
                     <div class="about-deco-blob"></div>
                 </div>
                 <div class="about-text reveal">
-                    <!-- EDIT: update bio paragraphs -->
                     <p class="about-desc">
                         I'm <span class="highlight">Muhammad Hassam Jamil</span> — a developer with a sharp eye
                         for elegant solutions and a deep fascination with Machine Learning. My journey began with
@@ -93,7 +91,6 @@
                         When I'm not engineering algorithms, I'm crafting interfaces that feel alive. I believe
                         in clean code, bold design, and shipping things that matter.
                     </p>
-                    <!-- EDIT: update stat numbers in data-target -->
                     <div class="stats-row">
                         <div class="stat">
                             <div class="stat-n" data-target="2">0</div>
@@ -113,38 +110,24 @@
         </div>
     </section>
 
-    <!-- SKILLS
-    =====================================================
-    HOW TO ADD A SKILL TO A CATEGORY:
-      1. Find the correct .skill-cat block below
-      2. Copy one <div class="skill-row"> block
-      3. Paste it before the closing </div> of that .skill-cat
-      4. Edit: icon class, skill name, data-w (0-100), and percentage text
-
-    HOW TO ADD A SKILL TO THE SOLAR SYSTEM:
-      Open script.js and add an entry to the solarSkills array at the top.
-    ===================================================== -->
+    <!-- SKILLS -->
     <section id="skills" class="skills-section">
         <div class="section-wrap">
             <div class="sec-label reveal">02 / skills &amp; tech</div>
             <h2 class="sec-title reveal">My Tech <span class="highlight">Universe</span></h2>
             <p class="sec-sub reveal">Each planet orbits the core — hover any planet to explore.</p>
 
-            <!-- Solar System -->
             <div class="solar-wrap reveal">
                 <canvas id="solar-canvas"></canvas>
             </div>
 
-            <!-- Skill Categories -->
             <div class="skills-grid">
 
-                <!-- LANGUAGES -->
                 <div class="skill-cat reveal" style="--cat-color:#00f5ff">
                     <div class="cat-head">
                         <div class="cat-icon"><i class="fas fa-code"></i></div>
                         <div class="cat-title">Languages</div>
                     </div>
-                    <!-- COPY THIS skill-row TO ADD A LANGUAGE SKILL -->
                     <div class="skill-row">
                         <div class="sk-icon"><i class="fab fa-python"></i></div>
                         <span class="sk-name">Python</span>
@@ -171,13 +154,11 @@
                     </div>
                 </div>
 
-                <!-- WEB DEVELOPMENT -->
                 <div class="skill-cat reveal" style="--cat-color:#8b5cf6">
                     <div class="cat-head">
                         <div class="cat-icon"><i class="fas fa-globe"></i></div>
                         <div class="cat-title">Web Development</div>
                     </div>
-                    <!-- COPY THIS skill-row TO ADD A WEB SKILL -->
                     <div class="skill-row">
                         <div class="sk-icon"><i class="fab fa-html5"></i></div>
                         <span class="sk-name">HTML5</span>
@@ -198,13 +179,11 @@
                     </div>
                 </div>
 
-                <!-- ML & DATA -->
                 <div class="skill-cat reveal" style="--cat-color:#10ffb0">
                     <div class="cat-head">
                         <div class="cat-icon"><i class="fas fa-brain"></i></div>
                         <div class="cat-title">ML &amp; Data</div>
                     </div>
-                    <!-- COPY THIS skill-row TO ADD AN ML SKILL -->
                     <div class="skill-row">
                         <div class="sk-icon"><i class="fas fa-robot"></i></div>
                         <span class="sk-name">Machine Learning</span>
@@ -219,13 +198,11 @@
                     </div>
                 </div>
 
-                <!-- DATABASE & TOOLS -->
                 <div class="skill-cat reveal" style="--cat-color:#ffb700">
                     <div class="cat-head">
                         <div class="cat-icon"><i class="fas fa-database"></i></div>
                         <div class="cat-title">Database &amp; Tools</div>
                     </div>
-                    <!-- COPY THIS skill-row TO ADD A DB/TOOL SKILL -->
                     <div class="skill-row">
                         <div class="sk-icon"><i class="fas fa-database"></i></div>
                         <span class="sk-name">MySQL</span>
@@ -246,150 +223,163 @@
                     </div>
                 </div>
 
-            </div><!-- end .skills-grid -->
+            </div>
         </div>
     </section>
 
-    <!-- PROJECTS
-    =====================================================
-    HOW TO ADD A PROJECT:
-      1. Copy the entire block below (from proj-card to /div)
-      2. Paste it inside .projects-grid after the last project
-      3. Edit: proj-number, icon class, title, description,
-               tech tags (duplicate/remove <span class="tag">),
-               and the GitHub href link
-    ===================================================== -->
+    <!-- PROJECTS — full-width carousel -->
     <section id="projects">
         <div class="section-wrap">
             <div class="sec-label reveal">03 / featured work</div>
             <h2 class="sec-title reveal">Things I've <span class="highlight">Built</span></h2>
 
-            <div class="projects-grid reveal">
+            <div class="proj-carousel-wrap reveal">
+                <div class="proj-carousel-outer">
+                    <div class="proj-track" id="proj-track">
 
-                <!-- ===================== PROJECT 01 ===================== -->
-                <div class="proj-card">
-                    <div class="proj-img">
-                        <!-- EDIT: change fa-graduation-cap to any Font Awesome icon -->
-                        <div class="proj-img-placeholder"><i class="fas fa-graduation-cap"></i></div>
-                        <!-- EDIT: change 01 to the project number -->
-                        <span class="proj-number">01</span>
-                        <div class="proj-img-glow"></div>
-                    </div>
-                    <div class="proj-body">
-                        <!-- EDIT: Project title -->
-                        <h3 class="proj-title">Academic Evaluation Management System</h3>
-                        <!-- EDIT: Project description -->
-                        <p class="proj-desc">
-                            A comprehensive system for managing academic evaluations, grades,
-                            and student performance tracking with automated reporting features.
-                        </p>
-                        <!-- EDIT: Tech tags — duplicate or remove spans -->
-                        <div class="proj-tags">
-                            <span class="tag">C#</span>
-                            <span class="tag">MySQL</span>
-                            <span class="tag">.NET</span>
+                        <!-- PROJECT 01 -->
+                        <div class="proj-card">
+                            <div class="proj-img">
+                                <div class="proj-img-placeholder"><i class="fas fa-graduation-cap"></i></div>
+                                <span class="proj-number">01</span>
+                                <div class="proj-img-glow"></div>
+                            </div>
+                            <div class="proj-body">
+                                <h3 class="proj-title">Academic Evaluation Management System</h3>
+                                <p class="proj-desc">
+                                    A comprehensive system for managing academic evaluations, grades,
+                                    and student performance tracking with automated reporting features.
+                                </p>
+                                <div class="proj-tags">
+                                    <span class="tag">C#</span>
+                                    <span class="tag">MySQL</span>
+                                    <span class="tag">.NET</span>
+                                </div>
+                                <div class="proj-links">
+                                    <a href="#" class="proj-link-btn gh" target="_blank">
+                                        <i class="fab fa-github"></i> Source Code
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="proj-links">
-                            <!-- EDIT: replace # with your GitHub link -->
-                            <a href="#" class="proj-link-btn gh" target="_blank">
-                                <i class="fab fa-github"></i> Source Code
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <!-- =================== END PROJECT 01 =================== -->
 
-                <!-- ===================== PROJECT 02 ===================== -->
-                <div class="proj-card">
-                    <div class="proj-img">
-                        <div class="proj-img-placeholder"><i class="fas fa-camera"></i></div>
-                        <span class="proj-number">02</span>
-                        <div class="proj-img-glow"></div>
-                    </div>
-                    <div class="proj-body">
-                        <h3 class="proj-title">Photography Portfolio Website</h3>
-                        <p class="proj-desc">
-                            A visually stunning portfolio website for photographers featuring
-                            gallery management, client booking system, and image optimization.
-                        </p>
-                        <div class="proj-tags">
-                            <span class="tag">HTML</span>
-                            <span class="tag">CSS</span>
-                            <span class="tag">JavaScript</span>
+                        <!-- PROJECT 02 -->
+                        <div class="proj-card">
+                            <div class="proj-img">
+                                <div class="proj-img-placeholder"><i class="fas fa-camera"></i></div>
+                                <span class="proj-number">02</span>
+                                <div class="proj-img-glow"></div>
+                            </div>
+                            <div class="proj-body">
+                                <h3 class="proj-title">Photography Portfolio Website</h3>
+                                <p class="proj-desc">
+                                    A visually stunning portfolio website for photographers featuring
+                                    gallery management, client booking system, and image optimization.
+                                </p>
+                                <div class="proj-tags">
+                                    <span class="tag">HTML</span>
+                                    <span class="tag">CSS</span>
+                                    <span class="tag">JavaScript</span>
+                                </div>
+                                <div class="proj-links">
+                                    <a href="#" class="proj-link-btn gh" target="_blank">
+                                        <i class="fab fa-github"></i> Source Code
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="proj-links">
-                            <a href="#" class="proj-link-btn gh" target="_blank">
-                                <i class="fab fa-github"></i> Source Code
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <!-- =================== END PROJECT 02 =================== -->
 
-                <!-- ===================== PROJECT 03 ===================== -->
-                <div class="proj-card">
-                    <div class="proj-img">
-                        <div class="proj-img-placeholder"><i class="fas fa-bullseye"></i></div>
-                        <span class="proj-number">03</span>
-                        <div class="proj-img-glow"></div>
-                    </div>
-                    <div class="proj-body">
-                        <h3 class="proj-title">Leads Generation System</h3>
-                        <p class="proj-desc">
-                            An automated lead generation and management platform with web scraping
-                            capabilities, CRM integration, and an analytics dashboard.
-                        </p>
-                        <div class="proj-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">Web Scraping</span>
-                            <span class="tag">MySQL</span>
+                        <!-- PROJECT 03 -->
+                        <div class="proj-card">
+                            <div class="proj-img">
+                                <div class="proj-img-placeholder"><i class="fas fa-bullseye"></i></div>
+                                <span class="proj-number">03</span>
+                                <div class="proj-img-glow"></div>
+                            </div>
+                            <div class="proj-body">
+                                <h3 class="proj-title">Leads Generation System</h3>
+                                <p class="proj-desc">
+                                    An automated lead generation and management platform with web scraping
+                                    capabilities, CRM integration, and an analytics dashboard.
+                                </p>
+                                <div class="proj-tags">
+                                    <span class="tag">Python</span>
+                                    <span class="tag">Web Scraping</span>
+                                    <span class="tag">MySQL</span>
+                                </div>
+                                <div class="proj-links">
+                                    <a href="#" class="proj-link-btn gh" target="_blank">
+                                        <i class="fab fa-github"></i> Source Code
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="proj-links">
-                            <a href="#" class="proj-link-btn gh" target="_blank">
-                                <i class="fab fa-github"></i> Source Code
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <!-- =================== END PROJECT 03 =================== -->
 
-            </div><!-- end .projects-grid -->
+                    </div><!-- end .proj-track -->
+                </div><!-- end .proj-carousel-outer -->
+
+                <!-- Arrows -->
+                <button class="proj-arrow proj-arrow-prev" id="proj-prev" aria-label="Previous project">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="proj-arrow proj-arrow-next" id="proj-next" aria-label="Next project">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div><!-- end .proj-carousel-wrap -->
+
+            <!-- Dots -->
+            <div class="proj-dots" id="proj-dots">
+                <button class="proj-dot active" data-i="0" aria-label="Project 1"></button>
+                <button class="proj-dot" data-i="1" aria-label="Project 2"></button>
+                <button class="proj-dot" data-i="2" aria-label="Project 3"></button>
+            </div>
+
         </div>
     </section>
 
-    <!-- CONNECT -->
+    <!-- CONNECT — stacked deck -->
     <section id="connect" class="connect-section">
         <div class="section-wrap">
             <div class="sec-label reveal">04 / let's connect</div>
             <h2 class="sec-title reveal">Find Me <span class="highlight">Online</span></h2>
-            <div class="social-cards reveal">
-                <!-- EDIT: update href links and handles -->
-                <a href="https://github.com/hassamjamildesign" class="social-card" style="--sc-color:#ffffff" target="_blank">
-                    <div class="sc-icon"><i class="fab fa-github"></i></div>
-                    <div class="sc-title">GitHub</div>
-                    <div class="sc-desc">Open source repos, contributions and experiments</div>
-                    <div class="sc-handle">@hassamjamildesign</div>
-                    <div class="sc-arrow"><i class="fas fa-arrow-up-right-from-square"></i></div>
-                </a>
-                <a href="https://www.linkedin.com/in/muhammad-hassam-jamil-308a23389/" class="social-card" style="--sc-color:#0077b5" target="_blank">
-                    <div class="sc-icon"><i class="fab fa-linkedin-in"></i></div>
-                    <div class="sc-title">LinkedIn</div>
-                    <div class="sc-desc">Professional network and career updates</div>
-                    <div class="sc-handle">Muhammad Hassam Jamil</div>
+            <p class="sec-sub reveal">Hover the stack to fan out all cards — click any to visit.</p>
+
+            <div class="social-deck reveal">
+                <!-- Card order: bottom to top (first in DOM = visually bottom) -->
+                <a href="mailto:muhammadhassamjamil@gmail.com" class="social-card" style="--sc-color:#ea4335">
+                    <div class="sc-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="sc-info">
+                        <div class="sc-title">Email</div>
+                        <div class="sc-desc">Direct line for collaborations and opportunities</div>
+                        <div class="sc-handle">muhammadhassamjamil@gmail.com</div>
+                    </div>
                     <div class="sc-arrow"><i class="fas fa-arrow-up-right-from-square"></i></div>
                 </a>
                 <a href="#" class="social-card" style="--sc-color:#1da1f2">
                     <div class="sc-icon"><i class="fab fa-twitter"></i></div>
-                    <div class="sc-title">Twitter / X</div>
-                    <div class="sc-desc">Tech thoughts, dev updates, random ideas</div>
-                    <div class="sc-handle">@hassam</div>
+                    <div class="sc-info">
+                        <div class="sc-title">Twitter / X</div>
+                        <div class="sc-desc">Tech thoughts, dev updates, random ideas</div>
+                        <div class="sc-handle">@hassam</div>
+                    </div>
                     <div class="sc-arrow"><i class="fas fa-arrow-up-right-from-square"></i></div>
                 </a>
-                <a href="mailto:muhammadhassamjamil@gmail.com" class="social-card" style="--sc-color:#ea4335">
-                    <div class="sc-icon"><i class="fas fa-envelope"></i></div>
-                    <div class="sc-title">Email</div>
-                    <div class="sc-desc">Direct line for collaborations and opportunities</div>
-                    <div class="sc-handle">muhammadhassamjamil@gmail.com</div>
+                <a href="https://www.linkedin.com/in/muhammad-hassam-jamil-308a23389/" class="social-card" style="--sc-color:#0077b5" target="_blank">
+                    <div class="sc-icon"><i class="fab fa-linkedin-in"></i></div>
+                    <div class="sc-info">
+                        <div class="sc-title">LinkedIn</div>
+                        <div class="sc-desc">Professional network and career updates</div>
+                        <div class="sc-handle">Muhammad Hassam Jamil</div>
+                    </div>
+                    <div class="sc-arrow"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                </a>
+                <a href="https://github.com/hassamjamildesign" class="social-card" style="--sc-color:#ffffff" target="_blank">
+                    <div class="sc-icon"><i class="fab fa-github"></i></div>
+                    <div class="sc-info">
+                        <div class="sc-title">GitHub</div>
+                        <div class="sc-desc">Open source repos, contributions and experiments</div>
+                        <div class="sc-handle">@hassamjamildesign</div>
+                    </div>
                     <div class="sc-arrow"><i class="fas fa-arrow-up-right-from-square"></i></div>
                 </a>
             </div>
@@ -405,7 +395,6 @@
                 <div class="contact-info-card">
                     <h3>I'm always open to new opportunities.</h3>
                     <p>Whether it's a full-time role, a freelance gig, or a wild ML experiment — I'm listening. Let's talk!</p>
-                    <!-- EDIT: update contact details -->
                     <div class="c-item">
                         <div class="c-item-icon"><i class="fas fa-envelope"></i></div>
                         <span class="c-item-text">muhammadhassamjamil@gmail.com</span>

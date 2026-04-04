@@ -48,7 +48,6 @@ const solarSkills = [
         dot.style.top  = my + 'px';
     });
 
-    // Smooth trailing ring
     function animateRing() {
         rx += (mx - rx) * 0.13;
         ry += (my - ry) * 0.13;
@@ -58,7 +57,6 @@ const solarSkills = [
     }
     animateRing();
 
-    // Expand ring on interactive elements
     document.querySelectorAll('a, button, .proj-card, .social-card, .skill-cat').forEach(el => {
         el.addEventListener('mouseenter', () => ring.classList.add('hovered'));
         el.addEventListener('mouseleave', () => ring.classList.remove('hovered'));
@@ -81,10 +79,10 @@ const solarSkills = [
         const count = Math.floor((canvas.width * canvas.height) / 6000);
         for (let i = 0; i < count; i++) {
             stars.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                r: Math.random() * 1.3 + 0.15,
-                a: Math.random(),
+                x:  Math.random() * canvas.width,
+                y:  Math.random() * canvas.height,
+                r:  Math.random() * 1.3 + 0.15,
+                a:  Math.random(),
                 da: (Math.random() * 0.3 + 0.08) * (Math.random() < 0.5 ? 1 : -1),
             });
         }
@@ -113,40 +111,31 @@ const solarSkills = [
    NAVIGATION
    ═══════════════════════════════════════════════════════ */
 (function initNav() {
-    const navbar    = document.getElementById('navbar');
-    const toggle    = document.getElementById('nav-toggle');
-    const navLinks  = document.getElementById('nav-links');
-    const btt       = document.getElementById('btt');
-    const allLinks  = document.querySelectorAll('.nav-links a');
-    const sections  = document.querySelectorAll('section[id]');
+    const navbar   = document.getElementById('navbar');
+    const toggle   = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    const btt      = document.getElementById('btt');
+    const allLinks = document.querySelectorAll('.nav-links a');
+    const sections = document.querySelectorAll('section[id]');
 
-    // Scroll effects
     window.addEventListener('scroll', () => {
-        // Sticky nav style
         navbar.classList.toggle('scrolled', window.scrollY > 50);
-
-        // Back-to-top visibility
         btt.classList.toggle('show', window.scrollY > 500);
 
-        // Active nav link
         let current = '';
         sections.forEach(sec => {
-            if (window.scrollY >= sec.offsetTop - 160) {
-                current = sec.id;
-            }
+            if (window.scrollY >= sec.offsetTop - 160) current = sec.id;
         });
         allLinks.forEach(a => {
             a.classList.toggle('active', a.getAttribute('href') === '#' + current);
         });
     });
 
-    // Mobile menu toggle
     toggle.addEventListener('click', () => {
         navLinks.classList.toggle('open');
         toggle.classList.toggle('open');
     });
 
-    // Close menu on link click
     allLinks.forEach(a => {
         a.addEventListener('click', () => {
             navLinks.classList.remove('open');
@@ -154,10 +143,7 @@ const solarSkills = [
         });
     });
 
-    // Back to top
-    btt.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 })();
 
 
@@ -174,10 +160,10 @@ const solarSkills = [
         'Data Scientist',
     ];
 
-    const el   = document.getElementById('type-word');
-    let wi     = 0;
-    let ci     = 0;
-    let del    = false;
+    const el = document.getElementById('type-word');
+    let wi   = 0;
+    let ci   = 0;
+    let del  = false;
 
     function tick() {
         const word = words[wi];
@@ -218,7 +204,6 @@ const solarSkills = [
 
     revealEls.forEach(el => observer.observe(el));
 
-    // Skill bars animate when their card enters viewport
     const barObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (!entry.isIntersecting) return;
@@ -234,7 +219,7 @@ const solarSkills = [
 
 
 /* ═══════════════════════════════════════════════════════
-   ANIMATED COUNTERS (About section stats)
+   ANIMATED COUNTERS
    ═══════════════════════════════════════════════════════ */
 (function initCounters() {
     const counters = document.querySelectorAll('.stat-n[data-target]');
@@ -271,13 +256,11 @@ const solarSkills = [
     let hovered  = null;
     let rafId;
 
-    /* Resize canvas to fill wrapper */
     function resize() {
         canvas.width  = canvas.offsetWidth;
         canvas.height = canvas.offsetHeight;
     }
 
-    /* Rounded rectangle helper */
     function roundRect(ctx, x, y, w, h, r) {
         ctx.beginPath();
         ctx.moveTo(x + r, y);
@@ -298,14 +281,13 @@ const solarSkills = [
         const cx = W / 2;
         const cy = H / 2;
 
-        /* Scale so the outermost orbit fits with padding */
         const maxOrbit  = solarSkills[solarSkills.length - 1].orbitR;
         const available = Math.min(W, H) / 2 - 30;
         const scale     = available / maxOrbit;
 
         ctx.clearRect(0, 0, W, H);
 
-        /* ─ Nebula glow ─ */
+        /* Nebula glow */
         const nebula = ctx.createRadialGradient(cx, cy, 0, cx, cy, available);
         nebula.addColorStop(0,   'rgba(0, 245, 255, 0.05)');
         nebula.addColorStop(0.5, 'rgba(139, 92, 246, 0.03)');
@@ -313,7 +295,7 @@ const solarSkills = [
         ctx.fillStyle = nebula;
         ctx.fillRect(0, 0, W, H);
 
-        /* ─ Orbit rings ─ */
+        /* Orbit rings */
         solarSkills.forEach((p, i) => {
             ctx.beginPath();
             ctx.arc(cx, cy, p.orbitR * scale, 0, Math.PI * 2);
@@ -326,11 +308,10 @@ const solarSkills = [
             ctx.setLineDash([]);
         });
 
-        /* ─ Sun ─ */
+        /* Sun */
         const sunR  = 28 * Math.min(scale * 2.5, 1.4);
         const pulse = 1 + 0.06 * Math.sin(ts * 0.0015);
 
-        // Glow halo
         const sunGlow = ctx.createRadialGradient(cx, cy, 0, cx, cy, sunR * 3.5);
         sunGlow.addColorStop(0,   'rgba(255, 200, 40, 0.22)');
         sunGlow.addColorStop(0.5, 'rgba(255, 160, 0, 0.08)');
@@ -340,7 +321,6 @@ const solarSkills = [
         ctx.arc(cx, cy, sunR * 3.5 * pulse, 0, Math.PI * 2);
         ctx.fill();
 
-        // Sun body
         const sunBody = ctx.createRadialGradient(cx - sunR * 0.3, cy - sunR * 0.3, 0, cx, cy, sunR);
         sunBody.addColorStop(0, '#fff8cc');
         sunBody.addColorStop(0.5, '#ffb700');
@@ -350,24 +330,21 @@ const solarSkills = [
         ctx.fillStyle = sunBody;
         ctx.fill();
 
-        // Sun label
-        ctx.fillStyle   = 'rgba(0,0,0,0.7)';
-        ctx.font        = `bold ${Math.max(8, 9 * scale)}px JetBrains Mono`;
-        ctx.textAlign   = 'center';
+        ctx.fillStyle    = 'rgba(0,0,0,0.7)';
+        ctx.font         = `bold ${Math.max(8, 9 * scale)}px JetBrains Mono`;
+        ctx.textAlign    = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('CORE', cx, cy);
 
-        /* ─ Planets ─ */
+        /* Planets */
         solarSkills.forEach((p, i) => {
-            // Advance angle
             angles[i] += p.speed;
 
-            const px   = cx + Math.cos(angles[i]) * p.orbitR * scale;
-            const py   = cy + Math.sin(angles[i]) * p.orbitR * scale;
-            const isH  = hovered === i;
-            const pr   = (10 + (p.pct / 100) * 10) * Math.min(scale * 2, 1) * (isH ? 1.35 : 1);
+            const px  = cx + Math.cos(angles[i]) * p.orbitR * scale;
+            const py  = cy + Math.sin(angles[i]) * p.orbitR * scale;
+            const isH = hovered === i;
+            const pr  = (10 + (p.pct / 100) * 10) * Math.min(scale * 2, 1) * (isH ? 1.35 : 1);
 
-            // Planet glow
             const glow = ctx.createRadialGradient(px, py, 0, px, py, pr * 2.8);
             glow.addColorStop(0, p.color + '66');
             glow.addColorStop(1, 'transparent');
@@ -376,7 +353,6 @@ const solarSkills = [
             ctx.arc(px, py, pr * 2.8, 0, Math.PI * 2);
             ctx.fill();
 
-            // Planet body
             const body = ctx.createRadialGradient(px - pr * 0.35, py - pr * 0.35, 0, px, py, pr);
             body.addColorStop(0,   '#ffffff');
             body.addColorStop(0.3,  p.color);
@@ -386,7 +362,6 @@ const solarSkills = [
             ctx.fillStyle = body;
             ctx.fill();
 
-            // Hover ring
             if (isH) {
                 ctx.beginPath();
                 ctx.arc(px, py, pr + 4, 0, Math.PI * 2);
@@ -395,21 +370,18 @@ const solarSkills = [
                 ctx.stroke();
             }
 
-            // Icon text on planet
             ctx.fillStyle    = 'rgba(0,0,0,0.75)';
             ctx.font         = `bold ${Math.max(6, 7 * Math.min(scale * 2, 1))}px JetBrains Mono`;
             ctx.textAlign    = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillText(p.icon, px, py);
 
-            /* ─ Tooltip on hover ─ */
             if (isH) {
                 const ttW = 110;
                 const ttH = 44;
                 let ttX   = px + pr + 12;
                 let ttY   = py - ttH / 2;
 
-                // Keep tooltip inside canvas
                 if (ttX + ttW > W - 8) ttX = px - pr - ttW - 12;
                 if (ttY < 4)           ttY = 4;
                 if (ttY + ttH > H - 4) ttY = H - ttH - 4;
@@ -422,13 +394,13 @@ const solarSkills = [
                 ctx.stroke();
 
                 ctx.fillStyle    = '#f0f0ff';
-                ctx.font         = `bold ${Math.max(8, 9 * Math.min(scale*1.8,1))}px JetBrains Mono`;
+                ctx.font         = `bold ${Math.max(8, 9 * Math.min(scale * 1.8, 1))}px JetBrains Mono`;
                 ctx.textAlign    = 'left';
                 ctx.textBaseline = 'top';
                 ctx.fillText(p.name.replace('\n', ' '), ttX + 10, ttY + 8);
 
                 ctx.fillStyle = p.color;
-                ctx.font      = `${Math.max(7, 8 * Math.min(scale*1.8,1))}px JetBrains Mono`;
+                ctx.font      = `${Math.max(7, 8 * Math.min(scale * 1.8, 1))}px JetBrains Mono`;
                 ctx.fillText(p.pct + '% proficiency', ttX + 10, ttY + 24);
             }
         });
@@ -436,24 +408,22 @@ const solarSkills = [
         rafId = requestAnimationFrame(draw);
     }
 
-    /* Mouse hover detection */
     canvas.addEventListener('mousemove', e => {
-        const rect  = canvas.getBoundingClientRect();
-        const mx    = e.clientX - rect.left;
-        const my    = e.clientY - rect.top;
-        const cx    = canvas.width  / 2;
-        const cy    = canvas.height / 2;
+        const rect      = canvas.getBoundingClientRect();
+        const mx        = e.clientX - rect.left;
+        const my        = e.clientY - rect.top;
+        const cx        = canvas.width  / 2;
+        const cy        = canvas.height / 2;
         const maxOrbit  = solarSkills[solarSkills.length - 1].orbitR;
         const available = Math.min(canvas.width, canvas.height) / 2 - 30;
-        const scale = available / maxOrbit;
+        const scale     = available / maxOrbit;
 
         let found = null;
         solarSkills.forEach((p, i) => {
             const px = cx + Math.cos(angles[i]) * p.orbitR * scale;
             const py = cy + Math.sin(angles[i]) * p.orbitR * scale;
             const pr = (10 + (p.pct / 100) * 10) * Math.min(scale * 2, 1);
-            const d  = Math.hypot(mx - px, my - py);
-            if (d < pr * 1.8) found = i;
+            if (Math.hypot(mx - px, my - py) < pr * 1.8) found = i;
         });
 
         hovered = found;
@@ -465,7 +435,6 @@ const solarSkills = [
         canvas.style.cursor = 'default';
     });
 
-    /* Init */
     resize();
     draw();
     window.addEventListener('resize', () => {
@@ -473,6 +442,72 @@ const solarSkills = [
         cancelAnimationFrame(rafId);
         draw();
     });
+})();
+
+
+/* ═══════════════════════════════════════════════════════
+   PROJECTS CAROUSEL
+   ═══════════════════════════════════════════════════════ */
+(function initProjCarousel() {
+    const track = document.getElementById('proj-track');
+    if (!track) return;
+
+    const dots  = document.querySelectorAll('.proj-dot');
+    const total = track.children.length;
+    let cur     = 0;
+    let startX  = 0;
+    let isDrag  = false;
+
+    function go(i) {
+        cur = (i + total) % total;
+        track.style.transform = `translateX(-${cur * 100}%)`;
+        dots.forEach((d, j) => d.classList.toggle('active', j === cur));
+    }
+
+    document.getElementById('proj-prev').addEventListener('click', () => go(cur - 1));
+    document.getElementById('proj-next').addEventListener('click', () => go(cur + 1));
+    dots.forEach(d => d.addEventListener('click', () => go(+d.dataset.i)));
+
+    /* Touch swipe */
+    track.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+        isDrag = true;
+    }, { passive: true });
+
+    track.addEventListener('touchend', e => {
+        if (!isDrag) return;
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) go(diff > 0 ? cur + 1 : cur - 1);
+        isDrag = false;
+    });
+
+    /* Mouse drag on desktop */
+    track.addEventListener('mousedown', e => {
+        startX = e.clientX;
+        isDrag = true;
+        track.style.cursor = 'grabbing';
+    });
+
+    window.addEventListener('mouseup', e => {
+        if (!isDrag) return;
+        const diff = startX - e.clientX;
+        if (Math.abs(diff) > 60) go(diff > 0 ? cur + 1 : cur - 1);
+        isDrag = false;
+        track.style.cursor = '';
+    });
+
+    /* Auto-advance every 6 s */
+    let autoTimer = setInterval(() => go(cur + 1), 6000);
+
+    /* Reset timer on manual interaction */
+    function resetTimer() {
+        clearInterval(autoTimer);
+        autoTimer = setInterval(() => go(cur + 1), 6000);
+    }
+
+    document.getElementById('proj-prev').addEventListener('click', resetTimer);
+    document.getElementById('proj-next').addEventListener('click', resetTimer);
+    dots.forEach(d => d.addEventListener('click', resetTimer));
 })();
 
 
@@ -485,7 +520,7 @@ const solarSkills = [
 
     form.addEventListener('submit', e => {
         e.preventDefault();
-        const btn = form.querySelector('.btn-submit');
+        const btn  = form.querySelector('.btn-submit');
         const orig = btn.innerHTML;
 
         btn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
