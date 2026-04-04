@@ -556,3 +556,347 @@ const solarSkills = [
 console.log('%c👾 Hey, curious dev!', 'color:#00f5ff; font-size:20px; font-weight:bold;');
 console.log('%cWelcome to Hassam\'s portfolio. The code is clean — just like the design.', 'color:#8b5cf6; font-size:13px;');
 console.log('%c🚀 Built with passion by Muhammad Hassam Jamil', 'color:#10ffb0; font-size:13px;');
+/* ═══════════════════════════════════════════════════════
+   LIFE JOURNEY CAROUSEL — append to bottom of script.js
+   ═══════════════════════════════════════════════════════ */
+
+(function initJourney() {
+    const track    = document.getElementById('journey-track');
+    if (!track) return;
+
+    const slides   = Array.from(track.querySelectorAll('.journey-slide'));
+    const dotsWrap = document.getElementById('journey-dots');
+    const progress = document.getElementById('journey-progress');
+    const btnPrev  = document.getElementById('journey-prev');
+    const btnNext  = document.getElementById('journey-next');
+
+    const total      = slides.length;
+    const slideWidth = 400; // slide width 360 + gap 40
+    let   cur        = 0;
+
+    /* ── Build dots ── */
+    slides.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className   = 'journey-dot' + (i === 0 ? ' active' : '');
+        d.setAttribute('aria-label', `Journey slide ${i + 1}`);
+        d.addEventListener('click', () => go(i));
+        dotsWrap.appendChild(d);
+    });
+
+    const dots = () => dotsWrap.querySelectorAll('.journey-dot');
+
+    /* ── Update ── */
+    function go(i) {
+        cur = Math.max(0, Math.min(i, total - 1));
+
+        /* Translate track so active slide centres in viewport */
+        const wrapW  = track.parentElement.offsetWidth;
+        const centre = wrapW / 2 - slideWidth / 2 + 40; // 40 = left padding offset
+        const offset = Math.max(0, cur * slideWidth - centre + 80);
+        track.style.transform = `translateX(-${offset}px)`;
+
+        /* Active class on slides */
+        slides.forEach((s, j) => s.classList.toggle('js-active', j === cur));
+
+        /* Dots */
+        dots().forEach((d, j) => d.classList.toggle('active', j === cur));
+
+        /* Progress bar */
+        progress.style.width = ((cur / (total - 1)) * 100) + '%';
+
+        /* Buttons disabled state */
+        btnPrev.disabled = cur === 0;
+        btnNext.disabled = cur === total - 1;
+    }
+
+    /* ── Arrows ── */
+    btnPrev.addEventListener('click', () => go(cur - 1));
+    btnNext.addEventListener('click', () => go(cur + 1));
+
+    /* ── Touch / drag swipe ── */
+    let startX   = 0;
+    let dragging = false;
+
+    track.addEventListener('touchstart', e => {
+        startX   = e.touches[0].clientX;
+        dragging = true;
+    }, { passive: true });
+
+    track.addEventListener('touchend', e => {
+        if (!dragging) return;
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) go(diff > 0 ? cur + 1 : cur - 1);
+        dragging = false;
+    });
+
+    track.addEventListener('mousedown', e => {
+        startX   = e.clientX;
+        dragging = true;
+        track.style.cursor = 'grabbing';
+    });
+
+    window.addEventListener('mouseup', e => {
+        if (!dragging) return;
+        const diff = startX - e.clientX;
+        if (Math.abs(diff) > 60) go(diff > 0 ? cur + 1 : cur - 1);
+        dragging = false;
+        track.style.cursor = '';
+    });
+
+    /* ── Keyboard navigation ── */
+    document.addEventListener('keydown', e => {
+        const section = document.getElementById('journey');
+        if (!section) return;
+        const rect = section.getBoundingClientRect();
+        const inView = rect.top < window.innerHeight && rect.bottom > 0;
+        if (!inView) return;
+
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') go(cur + 1);
+        if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   go(cur - 1);
+    });
+
+    /* ── Auto-advance (slow — storytelling pace) ── */
+    let autoTimer = setInterval(() => {
+        if (cur < total - 1) {
+            go(cur + 1);
+        } else {
+            clearInterval(autoTimer); // stop at last chapter
+        }
+    }, 5500);
+
+    function resetTimer() {
+        clearInterval(autoTimer);
+        autoTimer = setInterval(() => {
+            if (cur < total - 1) go(cur + 1);
+            else clearInterval(autoTimer);
+        }, 5500);
+    }
+
+    btnPrev.addEventListener('click', resetTimer);
+    btnNext.addEventListener('click', resetTimer);
+    dots().forEach(d => d.addEventListener('click', resetTimer));
+
+    /* ── Recalculate on resize ── */
+    window.addEventListener('resize', () => go(cur));
+
+    /* ── Shooting star particles on timeline ── */
+    (function spawnParticles() {
+        const universe = document.querySelector('.journey-universe');
+        if (!universe) return;
+
+        // insert particle layer
+        const layer = document.createElement('div');
+        layer.className = 'journey-particles';
+        universe.appendChild(layer);
+
+        function shoot() {
+            const p = document.createElement('div');
+            const size = Math.random() * 2 + 1;
+            const left = Math.random() * 100;
+            const dur  = Math.random() * 1800 + 900;
+            const color = Math.random() > 0.5 ? '#00f5ff' : '#8b5cf6';
+
+            Object.assign(p.style, {
+                position: 'absolute',
+                left: left + '%',
+                top: Math.random() * 100 + '%',
+                width: size + 'px',
+                height: size + 'px',
+                borderRadius: '50%',
+                background: color,
+                boxShadow: `0 0 ${size * 3}px ${color}`,
+                opacity: 0,
+                transition: `opacity 0.3s, transform ${dur}ms linear`,
+                transform: 'translateX(0px)',
+            });
+
+            layer.appendChild(p);
+            requestAnimationFrame(() => {
+                p.style.opacity = '0.7';
+                p.style.transform = `translateX(${(Math.random() > 0.5 ? 1 : -1) * (Math.random() * 120 + 60)}px)`;
+            });
+
+            setTimeout(() => {
+                p.style.opacity = '0';
+                setTimeout(() => p.remove(), 400);
+            }, dur - 400);
+        }
+
+        setInterval(shoot, 600);
+    })();
+
+    /* ── Initial state ── */
+    go(0);
+})();
+/* ═══════════════════════════════════════════════════════
+   LIFE JOURNEY CAROUSEL — append to bottom of script.js
+   ═══════════════════════════════════════════════════════ */
+
+(function initJourney() {
+    const track    = document.getElementById('journey-track');
+    if (!track) return;
+
+    const slides   = Array.from(track.querySelectorAll('.journey-slide'));
+    const dotsWrap = document.getElementById('journey-dots');
+    const progress = document.getElementById('journey-progress');
+    const btnPrev  = document.getElementById('journey-prev');
+    const btnNext  = document.getElementById('journey-next');
+
+    const total      = slides.length;
+    const slideWidth = 400; // slide width 360 + gap 40
+    let   cur        = 0;
+
+    /* ── Build dots ── */
+    slides.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className   = 'journey-dot' + (i === 0 ? ' active' : '');
+        d.setAttribute('aria-label', `Journey slide ${i + 1}`);
+        d.addEventListener('click', () => go(i));
+        dotsWrap.appendChild(d);
+    });
+
+    const dots = () => dotsWrap.querySelectorAll('.journey-dot');
+
+    /* ── Update ── */
+    function go(i) {
+        cur = Math.max(0, Math.min(i, total - 1));
+
+        /* Translate track so active slide centres in viewport */
+        const wrapW  = track.parentElement.offsetWidth;
+        const centre = wrapW / 2 - slideWidth / 2 + 40; // 40 = left padding offset
+        const offset = Math.max(0, cur * slideWidth - centre + 80);
+        track.style.transform = `translateX(-${offset}px)`;
+
+        /* Active class on slides */
+        slides.forEach((s, j) => s.classList.toggle('js-active', j === cur));
+
+        /* Dots */
+        dots().forEach((d, j) => d.classList.toggle('active', j === cur));
+
+        /* Progress bar */
+        progress.style.width = ((cur / (total - 1)) * 100) + '%';
+
+        /* Buttons disabled state */
+        btnPrev.disabled = cur === 0;
+        btnNext.disabled = cur === total - 1;
+    }
+
+    /* ── Arrows ── */
+    btnPrev.addEventListener('click', () => go(cur - 1));
+    btnNext.addEventListener('click', () => go(cur + 1));
+
+    /* ── Touch / drag swipe ── */
+    let startX   = 0;
+    let dragging = false;
+
+    track.addEventListener('touchstart', e => {
+        startX   = e.touches[0].clientX;
+        dragging = true;
+    }, { passive: true });
+
+    track.addEventListener('touchend', e => {
+        if (!dragging) return;
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) go(diff > 0 ? cur + 1 : cur - 1);
+        dragging = false;
+    });
+
+    track.addEventListener('mousedown', e => {
+        startX   = e.clientX;
+        dragging = true;
+        track.style.cursor = 'grabbing';
+    });
+
+    window.addEventListener('mouseup', e => {
+        if (!dragging) return;
+        const diff = startX - e.clientX;
+        if (Math.abs(diff) > 60) go(diff > 0 ? cur + 1 : cur - 1);
+        dragging = false;
+        track.style.cursor = '';
+    });
+
+    /* ── Keyboard navigation ── */
+    document.addEventListener('keydown', e => {
+        const section = document.getElementById('journey');
+        if (!section) return;
+        const rect = section.getBoundingClientRect();
+        const inView = rect.top < window.innerHeight && rect.bottom > 0;
+        if (!inView) return;
+
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') go(cur + 1);
+        if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   go(cur - 1);
+    });
+
+    /* ── Auto-advance (slow — storytelling pace) ── */
+    let autoTimer = setInterval(() => {
+        if (cur < total - 1) {
+            go(cur + 1);
+        } else {
+            clearInterval(autoTimer); // stop at last chapter
+        }
+    }, 5500);
+
+    function resetTimer() {
+        clearInterval(autoTimer);
+        autoTimer = setInterval(() => {
+            if (cur < total - 1) go(cur + 1);
+            else clearInterval(autoTimer);
+        }, 5500);
+    }
+
+    btnPrev.addEventListener('click', resetTimer);
+    btnNext.addEventListener('click', resetTimer);
+    dots().forEach(d => d.addEventListener('click', resetTimer));
+
+    /* ── Recalculate on resize ── */
+    window.addEventListener('resize', () => go(cur));
+
+    /* ── Shooting star particles on timeline ── */
+    (function spawnParticles() {
+        const universe = document.querySelector('.journey-universe');
+        if (!universe) return;
+
+        // insert particle layer
+        const layer = document.createElement('div');
+        layer.className = 'journey-particles';
+        universe.appendChild(layer);
+
+        function shoot() {
+            const p = document.createElement('div');
+            const size = Math.random() * 2 + 1;
+            const left = Math.random() * 100;
+            const dur  = Math.random() * 1800 + 900;
+            const color = Math.random() > 0.5 ? '#00f5ff' : '#8b5cf6';
+
+            Object.assign(p.style, {
+                position: 'absolute',
+                left: left + '%',
+                top: Math.random() * 100 + '%',
+                width: size + 'px',
+                height: size + 'px',
+                borderRadius: '50%',
+                background: color,
+                boxShadow: `0 0 ${size * 3}px ${color}`,
+                opacity: 0,
+                transition: `opacity 0.3s, transform ${dur}ms linear`,
+                transform: 'translateX(0px)',
+            });
+
+            layer.appendChild(p);
+            requestAnimationFrame(() => {
+                p.style.opacity = '0.7';
+                p.style.transform = `translateX(${(Math.random() > 0.5 ? 1 : -1) * (Math.random() * 120 + 60)}px)`;
+            });
+
+            setTimeout(() => {
+                p.style.opacity = '0';
+                setTimeout(() => p.remove(), 400);
+            }, dur - 400);
+        }
+
+        setInterval(shoot, 600);
+    })();
+
+    /* ── Initial state ── */
+    go(0);
+})();

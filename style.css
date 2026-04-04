@@ -1361,3 +1361,370 @@ section {
     .footer { padding: 40px 20px 28px; }
     .proj-body { padding: 22px 18px 28px; }
 }
+/* ═══════════════════════════════════════════════════════
+   LIFE JOURNEY SECTION — append to bottom of style.css
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Section shell ── */
+.journey-section {
+    padding: 120px 0 0;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* Dark nebula bg unique to journey */
+.journey-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 60% 40% at 20% 50%, rgba(139,92,246,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 80% 30%, rgba(0,245,255,0.05) 0%, transparent 70%),
+        var(--bg2);
+    z-index: 0;
+}
+
+/* Keep section-wrap label/title above bg */
+.journey-section .section-wrap {
+    position: relative;
+    z-index: 1;
+    padding: 0 40px 60px;
+}
+
+/* ── Universe container (full width) ── */
+.journey-universe {
+    position: relative;
+    z-index: 1;
+    padding-bottom: 80px;
+}
+
+/* ── Horizontal scrolling track ── */
+.journey-track-wrap {
+    overflow: hidden;
+    position: relative;
+}
+
+.journey-track {
+    display: flex;
+    align-items: center;
+    padding: 60px 80px 20px;
+    gap: 0;
+    transition: transform 0.72s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+    /* Each slide = 360px wide + gap = 400px step */
+}
+
+/* ── Individual slide ── */
+.journey-slide {
+    flex-shrink: 0;
+    width: 360px;
+    margin-right: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    /* Animate in on activation */
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+/* Inactive slides fade slightly */
+.journey-slide:not(.js-active) {
+    opacity: 0.45;
+    transform: scale(0.96);
+}
+
+.journey-slide.js-active { opacity: 1; transform: scale(1); }
+
+/* ── Year bubble ── */
+.js-year-bubble {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--cyan);
+    background: rgba(0, 245, 255, 0.08);
+    border: 1px solid rgba(0, 245, 255, 0.28);
+    border-radius: 20px;
+    padding: 6px 18px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 0 16px rgba(0, 245, 255, 0.15);
+    transition: background 0.4s, box-shadow 0.4s, border-color 0.4s;
+}
+
+.journey-slide.js-active .js-year-bubble {
+    background: rgba(0, 245, 255, 0.18);
+    border-color: var(--cyan);
+    box-shadow: 0 0 28px rgba(0, 245, 255, 0.4), 0 0 60px rgba(0, 245, 255, 0.12);
+}
+
+/* ── Connector line between bubble and card ── */
+.js-connector {
+    width: 2px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(0,245,255,0.4), rgba(139,92,246,0.3));
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    transition: height 0.4s;
+}
+
+.journey-slide.js-active .js-connector { height: 48px; }
+
+/* ── Card ── */
+.js-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 32px 28px 28px;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    transition: border-color 0.45s, box-shadow 0.45s, transform 0.45s;
+    transform: translateY(0);
+}
+
+/* Alternating card positions for visual rhythm */
+.js-card--top {
+    /* Normal */
+}
+
+.js-card--bottom {
+    /* Shifted down slightly to create wave */
+    margin-top: 24px;
+}
+
+.journey-slide.js-active .js-card {
+    border-color: rgba(139, 92, 246, 0.5);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(139,92,246,0.2);
+    transform: translateY(-4px);
+}
+
+/* Now card special pulse */
+.js-card--now {
+    border-color: rgba(255, 183, 0, 0.35) !important;
+}
+
+.js-card--now::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(255,183,0,0.06), rgba(139,92,246,0.06));
+    z-index: 0;
+}
+
+/* ── Animated glow behind card ── */
+.js-card-glow {
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: var(--cyan);
+    opacity: 0;
+    filter: blur(50px);
+    transition: opacity 0.5s;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.journey-slide.js-active .js-card-glow { opacity: 0.07; }
+
+/* ── Chapter tag ── */
+.js-era-tag {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Icon wrap ── */
+.js-icon-wrap {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: var(--jc, var(--cyan));
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.4s var(--ease), box-shadow 0.4s;
+    box-shadow: 0 0 0 0 var(--jc, var(--cyan));
+}
+
+.journey-slide.js-active .js-icon-wrap {
+    transform: scale(1.1) rotate(-4deg);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--jc, var(--cyan)) 40%, transparent);
+}
+
+/* ── Title ── */
+.js-title {
+    font-family: var(--display);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 12px;
+    letter-spacing: -0.3px;
+    position: relative;
+    z-index: 1;
+    transition: color 0.35s;
+}
+
+.journey-slide.js-active .js-title { color: var(--cyan); }
+
+/* ── Body text ── */
+.js-body {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.js-body em { color: var(--text); font-style: normal; border-bottom: 1px solid rgba(0,245,255,0.3); }
+
+/* ── Tags ── */
+.js-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+}
+
+.js-tag {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    padding: 4px 14px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    transition: border-color 0.35s, color 0.35s;
+}
+
+.journey-slide.js-active .js-tag {
+    border-color: rgba(139,92,246,0.4);
+    color: var(--violet);
+}
+
+/* ── Timeline bar at bottom ── */
+.journey-timeline-bar {
+    height: 3px;
+    background: rgba(255,255,255,0.06);
+    margin: 20px 80px 0;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+}
+
+.journey-timeline-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cyan), var(--violet));
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
+    box-shadow: 0 0 12px rgba(0,245,255,0.5);
+}
+
+/* ── Navigation arrows ── */
+.journey-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(4, 4, 13, 0.85);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: all 0.3s var(--ease);
+}
+
+.journey-arrow:hover {
+    border-color: var(--cyan);
+    color: var(--cyan);
+    box-shadow: 0 0 28px rgba(0, 245, 255, 0.3);
+    transform: translateY(-50%) scale(1.08);
+}
+
+.journey-arrow:disabled {
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+.journey-arrow-prev { left: 20px; }
+.journey-arrow-next { right: 20px; }
+
+/* ── Dots ── */
+.journey-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 28px;
+    padding: 0 0 20px;
+}
+
+.journey-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.35s, width 0.35s, border-radius 0.35s;
+}
+
+.journey-dot.active {
+    background: var(--cyan);
+    width: 26px;
+    border-radius: 4px;
+}
+
+/* ── Floating particle strip above timeline bar ── */
+.journey-particles {
+    position: absolute;
+    bottom: 60px;
+    left: 0;
+    right: 0;
+    height: 40px;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .journey-section .section-wrap { padding: 0 24px 40px; }
+    .journey-track { padding: 40px 24px 10px; }
+    .journey-slide { width: 280px; margin-right: 20px; }
+    .journey-arrow { display: none; }
+    .journey-timeline-bar { margin: 16px 24px 0; }
+}
+
+@media (max-width: 480px) {
+    .journey-slide { width: 260px; }
+}
